@@ -12,6 +12,8 @@ I chose a sudoku solver because it provides a good medium for visualizing a brut
     - It's serviceable for small visualizations as it is essentially vanilla JS DOM manipulation. In fact I might make a small wrapper package for visualizing advent of code solutions as they tend to look pretty.
 
 ### Running
+
 `make build`: to build the wasm binary `main.wasm`
+
 `make run`: runs a local file server that can be visited at localhost:8080
 
