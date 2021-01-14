@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Go WASM Sudoku Solver</title>
+		<!-- I haven't written CSS in a while... -->
+		<style>
+			* {
+				color: #eeeeee;
+				background-color: #555555;
+			}
+			body {
+				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+			}
+			h1, h2 {
+				text-align: center;
+				margin: 10px 0;
+			}
+			a:hover {
+				color: #87ceeb;
+			}
+			#root {
+				margin: 10px auto;
+				position: relative;
+				border: 2px #eeeeee solid;
+			}
+			.box {
+				font-size: 20px;
+				width: 50px;
+				height: 50px;
+				border: 1px #eeeeee solid;
+				position: absolute;
+				padding: 0;
+				margin: 0;
+				display: inline-block;
+				text-align: center;
+				line-height: 50px;
+			}
+			.highlighted {
+				background-color: #87ceeb;
+			}
+			button {
+				margin: 10px;
+				width: 125px;
+				height: 40px;
+				border-radius: 10px;
+				border: 1px #eeeeee solid;
+				font-weight: 700;
+				font-size: 20px;
+			}
+			button:hover {
+				background-color: #87ceeb;
+			}
+			button:disabled {
+				background-color: #111111;
+			}
+			.buttonGroup {
+				display: flex;
+				margin: 10px auto;
+			}
+			footer {
+				position: absolute;
+				text-align: center;
+				width: 100vw;
+				top: 97vh;
+			}
+		</style>
+		<script src="wasm_exec.js"></script>
+	</head>
+	<body>
+		<h1>
+			Go WASM Sudoku Solver
+		</h1>
+		<h2>
+			<a href="https://github.com/alexchao26/go-wasm-sudoku">
+				alexchao26/go-wasm-sudoku
+			</a>
+		</h2>
+		
+		<div id="root"></div>
+		
+		<div class="buttonGroup">
+			<button id="solve">
+				Solve
+			</button>
+		</div>
+
+	</body>
+	<footer>
+		Puzzles scraped from amNewYork
+	</footer>
+	<script>
+		const go = new Go();
+		WebAssembly
+			.instantiateStreaming(fetch("main.wasm"), go.importObject)
+			.then((result) => {
+				go.run(result.instance);
+			});
+	</script>
+</html>
